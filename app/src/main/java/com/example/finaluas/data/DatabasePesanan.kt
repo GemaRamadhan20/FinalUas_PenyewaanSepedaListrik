@@ -6,17 +6,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Pesanan::class], version = 1, exportSchema = false)
-abstract class DatabaseAdmin : RoomDatabase(){
+abstract class DatabasePesanan : RoomDatabase(){
     abstract fun DataPesananDao() : DataPesananDao
 
     companion object {
         @Volatile
-        private var Instance: DatabaseAdmin? = null
+        private var Instance: DatabasePesanan? = null
 
-        fun getDatabase(context: Context): DatabaseAdmin {
+        fun getDatabase(context: Context): DatabasePesanan {
             return Instance?: synchronized(this){
                 Room.databaseBuilder(context,
-                    DatabaseAdmin::class.java,
+                    DatabasePesanan::class.java,
                     "sepedalistrik_database")
                     .build().also { Instance=it}
             }
