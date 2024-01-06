@@ -19,4 +19,8 @@ class OfflineRepositoryPesanan (private val dataPesananDao: DataPesananDao) : Re
         return dataPesananDao.update(pesanan)
     }
 
+    override suspend fun deletePesanan(pesanan: Pesanan) {
+        return dataPesananDao.delete(pesanan)
+    }
+
 }
