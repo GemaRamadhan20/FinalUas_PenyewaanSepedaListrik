@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.finaluas.data.Pesanan
 import com.example.finaluas.repository.RepositoryPesanan
 
 class EntryViewModel(private val repositoryPesanan: RepositoryPesanan): ViewModel() {
@@ -15,12 +16,14 @@ class EntryViewModel(private val repositoryPesanan: RepositoryPesanan): ViewMode
             nama.isNotBlank() && alamat.isNotBlank() &&nohp.isNotBlank() &&jaminan.isNotBlank()
         }
     }
-
+    fun updateUiState(detailPesanan: DetailPesanan){
+        uiStatePesanan = UIStatePesanan(detailPesanan = detailPesanan, isEntryValid = validasiInput(detailPesanan))
+    }
 
 
     data class UIStatePesanan(
-val detailPesanan: DetailPesanan = DetailPesanan(),
-val isEntryValid: Boolean = false
+    val detailPesanan: DetailPesanan = DetailPesanan(),
+    val isEntryValid: Boolean = false
     )
 
 
@@ -30,5 +33,12 @@ val isEntryValid: Boolean = false
         val nohp : String = "",
         val alamat : String="",
         val jaminan : String=""
+    )
+    fun DetailPesanan.toPesanan(): Pesanan = Pesanan(
+        id = id,
+        nama = nama,
+        nohp = nohp,
+        alamat = alamat,
+        jaminan = jaminan
     )
 }
