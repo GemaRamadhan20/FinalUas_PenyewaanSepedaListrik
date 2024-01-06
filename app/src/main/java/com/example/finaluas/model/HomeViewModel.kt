@@ -4,13 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finaluas.data.Pesanan
 import com.example.finaluas.repository.OfflineRepositoryPesanan
+import com.example.finaluas.repository.RepositoryPesanan
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class HomeViewModel(private val repositoryPesanan: OfflineRepositoryPesanan): ViewModel() {
+class HomeViewModel(private val repositoryPesanan: RepositoryPesanan): ViewModel() {
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
     }
