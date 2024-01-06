@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sepeda Listrik</string>
+    <string name="username">Admin</string>
+    <string name="pass">Password</string>
 </resources>
