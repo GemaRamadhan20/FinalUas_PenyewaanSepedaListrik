@@ -2,4 +2,7 @@
     <string name="app_name">Sepeda Listrik</string>
     <string name="username">Admin</string>
     <string name="pass">Password</string>
+    <string name="delete">Hapus</string>
+    <string name="update">Edit</string>
+    <string name="edit_pesanan">Edit Pesanan</string>
 </resources>

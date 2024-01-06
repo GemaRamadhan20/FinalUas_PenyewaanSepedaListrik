@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class Pesanan(
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0,
-    val nama : String,
-    val nohp : String,
-    val alamat : String,
-    val jaminan : String
+    val nama : String = "",
+    val nohp : String = "",
+    val alamat : String="",
+    val jaminan : String=""
 )
