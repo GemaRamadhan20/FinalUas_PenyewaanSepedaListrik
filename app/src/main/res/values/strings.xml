@@ -4,5 +4,7 @@
     <string name="pass">Password</string>
     <string name="delete">Hapus</string>
     <string name="update">Edit</string>
+
     <string name="edit_pesanan">Edit Pesanan</string>
+
 </resources>
