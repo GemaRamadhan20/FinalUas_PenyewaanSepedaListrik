@@ -4,6 +4,15 @@
     <string name="pass">Password</string>
     <string name="delete">Hapus</string>
     <string name="update">Edit</string>
+    <string name="back">Kembali</string>
+    <string name="attention">Perhatiaan</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
+    <string name="edi_pesanan">Edit Pesanan</string>
+    <string name="detail_pesanan">Detail Pesanan</string>
+
+
+
 
     <string name="edit_pesanan">Edit Pesanan</string>
 
