@@ -41,4 +41,15 @@ class EntryViewModel(private val repositoryPesanan: RepositoryPesanan): ViewMode
         alamat = alamat,
         jaminan = jaminan
     )
+    fun Pesanan.toUiStatePesanan(isEntryValid: Boolean = false): UIStatePesanan = UIStatePesanan(
+        detailPesanan = this.toDetailPesanan(),
+        isEntryValid = isEntryValid
+    )
+    fun Pesanan.toDetailPesanan(): DetailPesanan = DetailPesanan(
+        id = id,
+        nama = nama,
+        nohp = nohp,
+        alamat = alamat,
+        jaminan = jaminan
+    )
 }
