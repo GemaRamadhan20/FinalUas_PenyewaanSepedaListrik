@@ -9,7 +9,8 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface DataPesananDao {
+interface PesananDao {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(pesanan: Pesanan)
 
@@ -19,8 +20,8 @@ interface DataPesananDao {
     @Delete
     suspend fun delete(pesanan: Pesanan)
 
-    @Query("SELECT * from tbl_pesanan WHERE id = id")
-    fun getPesanan(id: Int): Flow<Pesanan>
+    @Query("SELECT * from tbl_pesanan WHERE id = :id")
+    fun getPesanan(id: Int):Flow<Pesanan>
 
     @Query("SELECT * from tbl_pesanan ORDER BY nama ASC")
     fun getAllPesanan(): Flow<List<Pesanan>>

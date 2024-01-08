@@ -1,25 +1,20 @@
 <resources>
     <string name="app_name">Sepeda Listrik</string>
-    <string name="username">Admin</string>
-    <string name="pass">Password</string>
+    <string name="entry_pesanan">Tambah Pesanan</string>
+    <string name="deskripsi_no_item">Tidak ada Pesanan. Tap (+) untuk menambah data.</string>
+    <string name="nama">Nama Penyewa</string>
+    <string name="alamat">Alamat Penyewa</string>
+    <string name="telpon">Telpon Penyewa</string>
+    <string name="jaminan">Jaminan</string>
+    <string name="required_field"> required field</string>
+    <string name="btn_submit">Submit</string>
+    <string name="detail_pesanan">Detail Penyewa</string>
+    <string name="edit_pesanan">Edit Penyewa</string>
+    <string name="back">Kembali</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
     <string name="delete">Hapus</string>
     <string name="update">Edit</string>
-    <string name="nohp">Nomor Hp</string>
-    <string name="alamat">Alamat</string>
-    <string name="jaminan">Jaminan</string>
-    <string name="back">Kembali</string>
-    <string name="attention">Perhatiaan</string>
-    <string name="no">Tidak</string>
-    <string name="yes">Ya</string>
-    <string name="edi_pesanan">Edit Pesanan</string>
-    <string name="detail_pesanan">Detail Pesanan</string>
-    <string name="required_field">* required field</string>
-    <string name="btn_submit">Submit</string>
-    <string name="entry_pesanan">Tambah Pesanan</string>
-
-
-
-
-    <string name="edit_pesanan">Edit Pesanan</string>
-
+    <string name="attention">Perhatian</string>
+    <string name="tanya">Apakah anda yakin menghapus ini?</string>
 </resources>

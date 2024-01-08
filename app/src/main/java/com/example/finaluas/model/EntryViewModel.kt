@@ -13,7 +13,7 @@ class EntryViewModel(private val repositoryPesanan: RepositoryPesanan) : ViewMod
 
     private fun validasiInput(uiState: DetailPesanan = uiStatePesanan.detailPesanan): Boolean {
         return with(uiState) {
-            nama.isNotBlank() && alamat.isNotBlank() && nohp.isNotBlank() && jaminan.isNotBlank()
+            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank() && jaminan.isNotBlank()
         }
     }
 
@@ -34,15 +34,15 @@ class EntryViewModel(private val repositoryPesanan: RepositoryPesanan) : ViewMod
 }
 
 data class UIStatePesanan(
-    val detailPesanan: DetailPesanan = DetailPesanan(),
-    val isEntryValid: Boolean = false
+        val detailPesanan: DetailPesanan = DetailPesanan(),
+        val isEntryValid: Boolean = false
 )
 
 
 data class DetailPesanan(
     val id: Int = 0,
     val nama: String = "",
-    val nohp: String = "",
+    val telpon: String = "",
     val alamat: String = "",
     val jaminan: String = ""
 )
@@ -50,7 +50,7 @@ data class DetailPesanan(
 fun DetailPesanan.toPesanan(): Pesanan = Pesanan(
     id = id,
     nama = nama,
-    nohp = nohp,
+    telpon = telpon,
     alamat = alamat,
     jaminan = jaminan
 )
@@ -63,7 +63,7 @@ fun Pesanan.toUiStatePesanan(isEntryValid: Boolean = false): UIStatePesanan = UI
 fun Pesanan.toDetailPesanan(): DetailPesanan = DetailPesanan(
     id = id,
     nama = nama,
-    nohp = nohp,
+    telpon = telpon,
     alamat = alamat,
     jaminan = jaminan
 )

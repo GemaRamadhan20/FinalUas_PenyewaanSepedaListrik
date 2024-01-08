@@ -10,9 +10,26 @@ import com.example.finaluas.AplikasiSepeda
 object PenyediaViewModel {
     val Factory = viewModelFactory {
         initializer {
-            HomeViewModel(aplikasiSepeda().container.repositoryPesanan)
+            HomeViewModel(AplikasiSepeda().container.repositoryPesanan)
         }
-
+        initializer {
+            EntryViewModel(AplikasiSepeda().container.repositoryPesanan)
+        }
+        initializer {
+            DetailsViewModel(createSavedStateHandle(), AplikasiSepeda().container.repositoryPesanan)
+        }
+        initializer {
+            DetailsViewModel(
+                createSavedStateHandle(),
+                AplikasiSepeda().container.repositoryPesanan,
+            )
+        }
+        initializer {
+            EditViewModel(
+                createSavedStateHandle(),
+                AplikasiSepeda().container.repositoryPesanan,
+            )
+        }
     }
 }
 

@@ -36,5 +36,5 @@ class DetailsViewModel(
 
 data class ItemDetailUiState(
     val outOfStock: Boolean = true,
-    val detailPesanan: DetailPesanan= DetailPesanan()
+    val detailPesanan: DetailPesanan = DetailPesanan()
 )

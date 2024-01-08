@@ -1,10 +1,10 @@
 package com.example.finaluas.repository
 
-import com.example.finaluas.data.DataPesananDao
+import com.example.finaluas.data.PesananDao
 import com.example.finaluas.data.Pesanan
 import kotlinx.coroutines.flow.Flow
 
-class OfflineRepositoryPesanan (private val dataPesananDao: DataPesananDao) : RepositoryPesanan {
+class OfflineRepositoryPesanan (private val dataPesananDao: PesananDao) : RepositoryPesanan {
     override fun getAllPesananStream(): Flow<List<Pesanan>> {
         return dataPesananDao.getAllPesanan()
     }
