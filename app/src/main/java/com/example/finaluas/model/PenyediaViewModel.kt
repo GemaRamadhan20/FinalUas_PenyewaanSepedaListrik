@@ -12,6 +12,7 @@ object PenyediaViewModel {
         initializer {
             HomeViewModel(aplikasiSepeda().container.repositoryPesanan)
         }
+
     }
 }
 

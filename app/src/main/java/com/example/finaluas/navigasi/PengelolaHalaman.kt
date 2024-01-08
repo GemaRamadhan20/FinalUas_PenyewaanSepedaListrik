@@ -12,13 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.finaluas.AplikasiSepeda
+import com.example.finaluas.ui.halaman.DestinasiEntry
+import com.example.finaluas.ui.halaman.EntryPesananScreen
 import com.example.kontak.R
 
 
 @Composable
-fun SepedaApp(navController: NavHostController = rememberNavController()){
+fun SepedaApp(navController: NavHostController = rememberNavController()) {
     HostNavigasi(navController = navController)
 }
 
@@ -52,7 +56,11 @@ fun PesananTopAppBar(
 fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
-){
-
+) {
+    NavHost(navController = navController, startDestination = DestinasiEntry.route) {
+        composable(DestinasiEntry.route) {
+            EntryPesananScreen(navigateBack = { navController.popBackStack() })
+        }
+    }
 
 }
