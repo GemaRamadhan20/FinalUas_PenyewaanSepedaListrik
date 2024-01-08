@@ -9,6 +9,6 @@ interface ContainerApp {
 
 class ContainerDataApp(private val context: Context): ContainerApp{
     override val repositoryPesanan: RepositoryPesanan by lazy {
-        OfflineRepositoryPesanan(DatabasePesanan.getDatabase(context).DataPesananDao())
+        OfflineRepositoryPesanan(DatabasePesanan.getDatabase(context).pesananDao())
     }
 }

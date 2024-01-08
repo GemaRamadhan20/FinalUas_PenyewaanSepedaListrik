@@ -4,23 +4,23 @@ import com.example.finaluas.data.PesananDao
 import com.example.finaluas.data.Pesanan
 import kotlinx.coroutines.flow.Flow
 
-class OfflineRepositoryPesanan (private val dataPesananDao: PesananDao) : RepositoryPesanan {
+class OfflineRepositoryPesanan (private val PesananDao: PesananDao) : RepositoryPesanan {
     override fun getAllPesananStream(): Flow<List<Pesanan>> {
-        return dataPesananDao.getAllPesanan()
+        return PesananDao.getAllPesanan()
     }
 
     override fun getPesananStream(id: Int): Flow<Pesanan?> {
-        return dataPesananDao.getPesanan(id = id)
+        return PesananDao.getPesanan(id = id)
     }
 
-    override suspend fun insertPesanan(pesanan: Pesanan) = dataPesananDao.insert(pesanan)
+    override suspend fun insertPesanan(pesanan: Pesanan) = PesananDao.insert(pesanan)
 
     override suspend fun updatePesanan(pesanan: Pesanan) {
-        return dataPesananDao.update(pesanan)
+        return PesananDao.update(pesanan)
     }
 
     override suspend fun deletePesanan(pesanan: Pesanan) {
-        return dataPesananDao.delete(pesanan)
+        return PesananDao.delete(pesanan)
     }
 
 }
