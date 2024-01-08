@@ -4,6 +4,9 @@
     <string name="pass">Password</string>
     <string name="delete">Hapus</string>
     <string name="update">Edit</string>
+    <string name="nohp">Nomor Hp</string>
+    <string name="alamat">Alamat</string>
+    <string name="jaminan">Jaminan</string>
     <string name="back">Kembali</string>
     <string name="attention">Perhatiaan</string>
     <string name="no">Tidak</string>
