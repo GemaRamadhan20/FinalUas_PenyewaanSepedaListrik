@@ -38,7 +38,7 @@ import com.example.finaluas.model.HomeViewModel
 import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
+import com.example.finaluas.R
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"

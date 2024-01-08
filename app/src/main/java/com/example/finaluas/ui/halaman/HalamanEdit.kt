@@ -12,7 +12,7 @@ import com.example.finaluas.model.EditViewModel
 import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
+import com.example.finaluas.R
 import kotlinx.coroutines.launch
 
 object ItemEditDestination : DestinasiNavigasi {

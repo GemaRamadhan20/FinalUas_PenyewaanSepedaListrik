@@ -41,7 +41,7 @@ import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.model.toPesanan
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
+import com.example.finaluas.R
 import kotlinx.coroutines.launch
 
 object DetailsDestination : DestinasiNavigasi {
@@ -151,7 +151,7 @@ fun ItemDetails(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
             ItemDetailRow(
-                labelResID = R.string.username,
+                labelResID = R.string.nama,
                 itemDetail = pesanan.nama,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
@@ -161,8 +161,8 @@ fun ItemDetails(
                 )
             )
             ItemDetailRow(
-                labelResID = R.string.nohp,
-                itemDetail = pesanan.nohp,
+                labelResID = R.string.telpon,
+                itemDetail = pesanan.telpon,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen

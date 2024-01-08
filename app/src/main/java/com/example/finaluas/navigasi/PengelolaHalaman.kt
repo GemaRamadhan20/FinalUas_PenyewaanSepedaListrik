@@ -26,7 +26,7 @@ import com.example.finaluas.ui.halaman.EntryPesananScreen
 import com.example.finaluas.ui.halaman.HomeScreen
 import com.example.finaluas.ui.halaman.ItemEditDestination
 import com.example.finaluas.ui.halaman.ItemEditScreen
-import com.example.kontak.R
+import com.example.finaluas.R
 
 
 @Composable
@@ -65,7 +65,9 @@ fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    NavHost(navController = navController, startDestination = DestinasiEntry.route,
+    NavHost(
+        navController = navController,
+        startDestination = DestinasiHome.route,
         modifier = Modifier
     ) {
         composable(DestinasiHome.route) {
@@ -79,6 +81,7 @@ fun HostNavigasi(
         composable(DestinasiEntry.route) {
             EntryPesananScreen(navigateBack = { navController.popBackStack() })
         }
+
         composable(
             DetailsDestination.routeWithArgs,
             arguments = listOf(navArgument(DetailsDestination.pesananIdArg) {
@@ -93,6 +96,7 @@ fun HostNavigasi(
                 )
             }
         }
+
         composable(
             ItemEditDestination.routeWithArgs,
             arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {

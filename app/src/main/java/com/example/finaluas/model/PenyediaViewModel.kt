@@ -33,5 +33,5 @@ object PenyediaViewModel {
     }
 }
 
-fun CreationExtras.aplikasiSepeda(): AplikasiSepeda =
+fun CreationExtras.AplikasiSepeda(): AplikasiSepeda =
     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiSepeda)
