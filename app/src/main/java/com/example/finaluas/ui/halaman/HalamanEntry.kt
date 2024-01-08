@@ -18,6 +18,8 @@ import com.example.finaluas.model.DetailPesanan
 import com.example.finaluas.model.UIStatePesanan
 import com.example.kontak.R
 
+
+
 @Composable
 fun EntryPesananBody(
     uiStatePesanan: UIStatePesanan,
