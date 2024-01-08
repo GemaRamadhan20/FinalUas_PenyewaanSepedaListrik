@@ -40,7 +40,7 @@ object DestinasiEntry : DestinasiNavigasi {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EntrySiswaScreen(
+fun EntryPesananScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: EntryViewModel = viewModel(factory = PenyediaViewModel.Factory)
@@ -115,16 +115,16 @@ fun FormInputPesanan(
         OutlinedTextField(
             value = detailPesanan.nama,
             onValueChange = { onValueChange(detailPesanan.copy(nama = it)) },
-            label = { Text(stringResource(R.string.username)) },
+            label = { Text(stringResource(R.string.nama)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
         OutlinedTextField(
-            value = detailPesanan.nohp,
-            onValueChange = { onValueChange(detailPesanan.copy(nohp = it)) },
+            value = detailPesanan.telpon,
+            onValueChange = { onValueChange(detailPesanan.copy(telpon = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            label = { Text(stringResource(R.string.nohp)) },
+            label = { Text(stringResource(R.string.telpon)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true

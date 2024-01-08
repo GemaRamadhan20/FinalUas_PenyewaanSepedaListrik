@@ -12,12 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.finaluas.AplikasiSepeda
 import com.example.finaluas.ui.halaman.DestinasiEntry
+import com.example.finaluas.ui.halaman.DestinasiHome
+import com.example.finaluas.ui.halaman.DetailsDestination
+import com.example.finaluas.ui.halaman.DetailsScreen
 import com.example.finaluas.ui.halaman.EntryPesananScreen
+import com.example.finaluas.ui.halaman.HomeScreen
+import com.example.finaluas.ui.halaman.ItemEditDestination
+import com.example.finaluas.ui.halaman.ItemEditScreen
 import com.example.kontak.R
 
 
@@ -57,10 +65,44 @@ fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    NavHost(navController = navController, startDestination = DestinasiEntry.route) {
+    NavHost(navController = navController, startDestination = DestinasiEntry.route,
+        modifier = Modifier
+    ) {
+        composable(DestinasiHome.route) {
+            HomeScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                onDetailClick = { itemId ->
+                    navController.navigate("${DetailsDestination.route}/$itemId")
+                },
+            )
+        }
         composable(DestinasiEntry.route) {
             EntryPesananScreen(navigateBack = { navController.popBackStack() })
         }
-    }
+        composable(
+            DetailsDestination.routeWithArgs,
+            arguments = listOf(navArgument(DetailsDestination.pesananIdArg) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getInt(DetailsDestination.pesananIdArg)
+            itemId?.let {
+                DetailsScreen(
+                    navigateBack = { navController.popBackStack() },
+                    navigateToEditItem = { navController.navigate("${ItemEditDestination.route}/$it") }
+                )
+            }
+        }
+        composable(
+            ItemEditDestination.routeWithArgs,
+            arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            ItemEditScreen(navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() })
+        }
 
+
+    }
 }
