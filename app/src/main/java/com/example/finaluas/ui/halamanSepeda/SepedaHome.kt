@@ -1,4 +1,4 @@
-package com.example.finaluas.ui.halaman
+package com.example.finaluas.ui.halamanSepeda
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,90 +33,91 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.finaluas.data.Pesanan
-import com.example.finaluas.model.HomeViewModel
+import com.example.finaluas.R
+import com.example.finaluas.data.Sepeda
 import com.example.finaluas.model.PenyediaViewModel
+import com.example.finaluas.model.sepeda.SepedaHomeViewModel
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.finaluas.R
 
-object DestinasiHome : DestinasiNavigasi {
-    override val route = "home"
+object DestinasiHomeSepeda : DestinasiNavigasi {
+    override val route = "home_sepeda"
     override val titleRes = R.string.app_name
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    navigateToItemEntry: () -> Unit,
+fun HomeScreenSepeda(
+    navigateToSepedaEntry: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (Int) -> Unit = {},
-    viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: SepedaHomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
             PesananTopAppBar(
-                title = stringResource(id = DestinasiHome.titleRes),
+                title = stringResource(id = DestinasiHomeSepeda.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                navigateUp = onBackClick
             )
         }, floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToItemEntry,
+                onClick = navigateToSepedaEntry,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.entry_pesanan)
+                    contentDescription = stringResource(id = R.string.entry_sepeda)
                 )
             }
         }
     ) { innerPadding ->
-        val uiStatePesanan by viewModel.homeUiState.collectAsState()
-        BodyHome(
+        val uiStateSepeda by viewModel.homeUiState.collectAsState()
+        BodyHomeSepeda(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize(),
-            itemPesanan = uiStatePesanan.listPesanan,
-            onPesananClick = onDetailClick
+            itemSepeda = uiStateSepeda.listSepeda,
+            onSepedaClick = onDetailClick
         )
     }
 }
 
 @Composable
-fun BodyHome(
+fun BodyHomeSepeda(
     modifier: Modifier,
-    itemPesanan: List<Pesanan>,
-    onPesananClick: (Int) -> Unit = {}
+    itemSepeda: List<Sepeda>,
+    onSepedaClick: (Int) -> Unit = {}
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
-        if (itemPesanan.isEmpty()) {
+        if (itemSepeda.isEmpty()) {
             Text(
                 text = stringResource(R.string.deskripsi_no_item),
                 textAlign = TextAlign.Center, style = MaterialTheme.typography.titleLarge
             )
         } else {
-            ListPesanan(
-                itemPesanan = itemPesanan,
+            ListSepeda(
+                itemSepeda = itemSepeda,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
-                onItemClick = { onPesananClick(it.id) }
+                onItemClick = { onSepedaClick(it.id) }
             )
         }
     }
 }
 
 @Composable
-fun ListPesanan(
-    itemPesanan: List<Pesanan>,
+fun ListSepeda(
+    itemSepeda: List<Sepeda>,
     modifier: Modifier = Modifier,
-    onItemClick: (Pesanan) -> Unit
+    onItemClick: (Sepeda) -> Unit
 ) {
     LazyColumn(modifier = Modifier) {
-        items(items = itemPesanan, key = { it.id }) { person ->
-            DataPesanan(
-                pesanan = person,
+        items(items = itemSepeda, key = { it.id }) { person ->
+            com.example.finaluas.ui.halamanSepeda.DataSepeda(
+                sepeda = person,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clickable { onItemClick(person) }
@@ -126,8 +127,8 @@ fun ListPesanan(
 }
 
 @Composable
-fun DataPesanan(
-    pesanan : Pesanan, modifier: Modifier = Modifier
+fun DataSepeda(
+    sepeda: Sepeda, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier, elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -140,25 +141,21 @@ fun DataPesanan(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = pesanan.nama,
+                    text = sepeda.nama,
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.Phone,
+                    imageVector = Icons.Default.ShoppingCart,
                     contentDescription = null
                 )
                 Text(
-                    text = pesanan.telpon,
+                    text = sepeda.harga,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
             Text(
-                text = pesanan.alamat,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = pesanan.jaminan,
+                text = sepeda.merk,
                 style = MaterialTheme.typography.titleMedium
             )
         }

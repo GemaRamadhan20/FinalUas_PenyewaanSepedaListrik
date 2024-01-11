@@ -1,4 +1,4 @@
-package com.example.finaluas.ui.halaman
+package com.example.finaluas.ui.halamanPesanan
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,14 +8,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.finaluas.R
 import com.example.finaluas.model.EditViewModel
 import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
 import kotlinx.coroutines.launch
 
-object ItemEditDestination : DestinasiNavigasi {
+object PesananEditDestination : DestinasiNavigasi {
     override val route = "item_edit"
     override val titleRes = R.string.edit_pesanan
     const val itemIdArg = "itemId"
@@ -24,7 +24,7 @@ object ItemEditDestination : DestinasiNavigasi {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemEditScreen(
+fun PesananEditScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
@@ -34,7 +34,7 @@ fun ItemEditScreen(
     Scaffold(
         topBar = {
             PesananTopAppBar(
-                title = stringResource(ItemEditDestination.titleRes),
+                title = stringResource(PesananEditDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = onNavigateUp
             )

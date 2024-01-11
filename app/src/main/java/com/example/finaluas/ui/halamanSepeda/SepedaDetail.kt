@@ -1,4 +1,4 @@
-package com.example.finaluas.ui.halaman
+package com.example.finaluas.ui.halamanSepeda
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -34,75 +34,64 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.finaluas.data.Pesanan
+import com.example.finaluas.R
+import com.example.finaluas.data.Sepeda
 import com.example.finaluas.model.DetailsViewModel
 import com.example.finaluas.model.ItemDetailUiState
 import com.example.finaluas.model.PenyediaViewModel
-import com.example.finaluas.model.toPesanan
+import com.example.finaluas.model.sepeda.SepedaDetailUiState
+import com.example.finaluas.model.sepeda.SepedaDetailViewModel
+import com.example.finaluas.model.sepeda.toSepeda
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
 import kotlinx.coroutines.launch
 
-object DetailsDestination : DestinasiNavigasi {
-    override val route = "item_details"
-    override val titleRes = R.string.detail_pesanan
-    const val pesananIdArg = "itemId"
-    val routeWithArgs = "$route/{${pesananIdArg}"
+object DetailsSepedaDestination : DestinasiNavigasi {
+    override val route = "sepeda_details"
+    override val titleRes = R.string.detail_sepeda
+    const val sepedaIdArg = "sepedaId"
+    val routeWithArgs = "$route/{${sepedaIdArg}"
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsScreen(
+fun SepedaDetailsScreen(
     navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DetailsViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: SepedaDetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState = viewModel.sepedauiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
             PesananTopAppBar(
-                title = stringResource(DetailsDestination.titleRes),
+                title = stringResource(DetailsSepedaDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
         }, floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateToEditItem(uiState.value.detailPesanan.id) },
+                onClick = { navigateToEditItem(uiState.value.detailSepeda.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
 
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = stringResource(R.string.edit_pesanan),
+                    contentDescription = stringResource(R.string.edit_sepeda),
                 )
             }
         }, modifier = modifier
     ) { innerPadding ->
-        ItemDetailsBody(
-            itemDetailUiState = uiState.value,
-            onDelete = {
-                // Note: If the user rotates the screen very fast, the operation may get cancelled
-                // and the item may not be deleted from the Database. This is because when config
-                // change occurs, the Activity will be recreated and the rememberCoroutineScope will
-                // be cancelled - since the scope is bound to composition.
-                coroutineScope.launch {
-                    viewModel.deleteItem()
-                    navigateBack()
-                }
-            },
-            modifier = Modifier
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState()),
-
-            )
+       SepedaDetailsBody(sepedaDetailUiState = uiState.value, onDelete = {coroutineScope.launch {
+           viewModel.deleteSepeda()
+           navigateBack()
+       }}, modifier = modifier.padding(innerPadding))
     }
 }
 @Composable
-private fun ItemDetailsBody(
-    itemDetailUiState: ItemDetailUiState,
+private fun SepedaDetailsBody(
+    sepedaDetailUiState: SepedaDetailUiState,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -111,8 +100,8 @@ private fun ItemDetailsBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
-        ItemDetails(
-            pesanan  = itemDetailUiState.detailPesanan.toPesanan(), modifier = Modifier.fillMaxWidth()
+        SepedaDetails(
+            sepeda  = sepedaDetailUiState.detailSepeda.toSepeda(), modifier = Modifier.fillMaxWidth()
         )
 
         OutlinedButton(
@@ -135,8 +124,8 @@ private fun ItemDetailsBody(
     }
 }
 @Composable
-fun ItemDetails(
-    pesanan: Pesanan, modifier: Modifier = Modifier
+fun SepedaDetails(
+    sepeda: Sepeda, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
@@ -150,9 +139,9 @@ fun ItemDetails(
                 .padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
-            ItemDetailRow(
-                labelResID = R.string.nama,
-                itemDetail = pesanan.nama,
+            SepedaDetailRow(
+                labelResID = R.string.nama_sepeda,
+                itemDetail = sepeda.nama,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -160,9 +149,9 @@ fun ItemDetails(
                     )
                 )
             )
-            ItemDetailRow(
-                labelResID = R.string.telpon,
-                itemDetail = pesanan.telpon,
+            SepedaDetailRow(
+                labelResID = R.string.harga_sepeda,
+                itemDetail = sepeda.harga,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -170,19 +159,9 @@ fun ItemDetails(
                     )
                 )
             )
-            ItemDetailRow(
-                labelResID = R.string.alamat,
-                itemDetail = pesanan.alamat,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
-            )
-            ItemDetailRow(
-                labelResID = R.string.jaminan,
-                itemDetail = pesanan.jaminan,
+            SepedaDetailRow(
+                labelResID = R.string.merk_sepeda,
+                itemDetail = sepeda.merk,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -191,11 +170,10 @@ fun ItemDetails(
                 )
             )
         }
-
     }
 }
 @Composable
-private fun ItemDetailRow(
+private fun SepedaDetailRow(
     @StringRes labelResID: Int, itemDetail: String, modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {

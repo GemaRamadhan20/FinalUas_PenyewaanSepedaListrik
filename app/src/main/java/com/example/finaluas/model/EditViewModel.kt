@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finaluas.repository.RepositoryPesanan
-import com.example.finaluas.ui.halaman.ItemEditDestination
+import com.example.finaluas.ui.halamanPesanan.PesananEditDestination
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ class EditViewModel(
     var pesananUiState by mutableStateOf(UIStatePesanan())
         private set
 
-    private val itemId: Int = checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
+    private val itemId: Int = checkNotNull(savedStateHandle[PesananEditDestination.itemIdArg])
 
     init {
         viewModelScope.launch {

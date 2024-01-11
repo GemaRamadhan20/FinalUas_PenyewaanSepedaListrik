@@ -1,4 +1,4 @@
-package com.example.finaluas.ui.halaman
+package com.example.finaluas.ui.halamanPesanan
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,17 +23,16 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.finaluas.data.Pesanan
+import com.example.finaluas.R
 import com.example.finaluas.model.DetailPesanan
 import com.example.finaluas.model.EntryViewModel
 import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.model.UIStatePesanan
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.kontak.R
 import kotlinx.coroutines.launch
 
-object DestinasiEntry : DestinasiNavigasi {
+object DestinasiEntryPesanan : DestinasiNavigasi {
     override val route = "item_entry"
     override val titleRes = R.string.entry_pesanan
 }
@@ -51,7 +50,7 @@ fun EntryPesananScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             PesananTopAppBar(
-                title = stringResource(DestinasiEntry.titleRes),
+                title = stringResource(DestinasiEntryPesanan.titleRes),
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack

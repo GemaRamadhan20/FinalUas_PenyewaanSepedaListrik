@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finaluas.repository.RepositoryPesanan
-import com.example.finaluas.ui.halaman.DetailsDestination
+import com.example.finaluas.ui.halamanPesanan.DetailsPesananDestination
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -16,7 +16,7 @@ class DetailsViewModel(
     private val repositoryPesanan: RepositoryPesanan
 ) : ViewModel() {
 
-    private val pesananId: Int = checkNotNull(savedStateHandle[DetailsDestination.pesananIdArg])
+    private val pesananId: Int = checkNotNull(savedStateHandle[DetailsPesananDestination.pesananIdArg])
     val uiState: StateFlow<ItemDetailUiState> =
         repositoryPesanan.getPesananStream(pesananId).filterNotNull()
             .map { ItemDetailUiState(detailPesanan = it.toDetailPesanan()) }.stateIn(

@@ -17,16 +17,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.finaluas.AplikasiSepeda
-import com.example.finaluas.ui.halaman.DestinasiEntry
-import com.example.finaluas.ui.halaman.DestinasiHome
-import com.example.finaluas.ui.halaman.DetailsDestination
-import com.example.finaluas.ui.halaman.DetailsScreen
-import com.example.finaluas.ui.halaman.EntryPesananScreen
-import com.example.finaluas.ui.halaman.HomeScreen
-import com.example.finaluas.ui.halaman.ItemEditDestination
-import com.example.finaluas.ui.halaman.ItemEditScreen
-import com.example.kontak.R
+import com.example.finaluas.R
+import com.example.finaluas.ui.Home
+import com.example.finaluas.ui.HomeScreenDisplay
+import com.example.finaluas.ui.halamanPesanan.DestinasiEntryPesanan
+import com.example.finaluas.ui.halamanPesanan.DestinasiHomePesanan
+import com.example.finaluas.ui.halamanPesanan.DetailsPesananDestination
+import com.example.finaluas.ui.halamanPesanan.EntryPesananScreen
+import com.example.finaluas.ui.halamanPesanan.HomeScreenPesanan
+import com.example.finaluas.ui.halamanPesanan.PesananDetailsScreen
+import com.example.finaluas.ui.halamanPesanan.PesananEditDestination
+import com.example.finaluas.ui.halamanPesanan.PesananEditScreen
+import com.example.finaluas.ui.halamanSepeda.DestinasiEntrySepeda
+import com.example.finaluas.ui.halamanSepeda.DestinasiHomeSepeda
+import com.example.finaluas.ui.halamanSepeda.DetailsSepedaDestination
+import com.example.finaluas.ui.halamanSepeda.EntrySepedaScreen
+import com.example.finaluas.ui.halamanSepeda.HomeScreenSepeda
+import com.example.finaluas.ui.halamanSepeda.SepedaDetailsScreen
+import com.example.finaluas.ui.halamanSepeda.SepedaEditDestination
+import com.example.finaluas.ui.halamanSepeda.SepedaEditScreen
 
 
 @Composable
@@ -64,49 +73,85 @@ fun PesananTopAppBar(
 fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
+) {NavHost(
+    navController = navController,
+    startDestination = Home.route,
+    modifier = Modifier
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = DestinasiHome.route,
-        modifier = Modifier
-    ) {
-        composable(DestinasiHome.route) {
-            HomeScreen(
-                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
-                onDetailClick = { itemId ->
-                    navController.navigate("${DetailsDestination.route}/$itemId")
-                },
+    composable(Home.route) {
+        HomeScreenDisplay(
+            modifier = modifier,
+            navigateToPesanan = { navController.navigate(DestinasiHomePesanan.route) },
+            navigateToSepeda = { navController.navigate(DestinasiHomeSepeda.route) }
+        )
+    }
+    composable(DestinasiHomePesanan.route) {
+        HomeScreenPesanan(
+            navigateToItemEntry = { navController.navigate(DestinasiEntryPesanan.route) },
+            onDetailClick = { pesananId -> navController.navigate("${DetailsPesananDestination.route}/$pesananId") },
+            onBackClick = { navController.popBackStack() })
+    }
+    composable(DestinasiHomeSepeda.route) {
+        HomeScreenSepeda(
+            navigateToSepedaEntry = { navController.navigate(DestinasiEntrySepeda.route) },
+            onDetailClick = { sepedaId -> navController.navigate("${DetailsSepedaDestination.route}/$sepedaId") },
+            onBackClick = { navController.popBackStack() }
+        )
+    }
+    composable(DestinasiEntryPesanan.route) {
+        EntryPesananScreen(navigateBack = { navController.popBackStack() })
+    }
+    composable(DestinasiHomeSepeda.route) {
+        EntrySepedaScreen(navigateBack = { navController.popBackStack() })
+    }
+    composable(
+        DetailsPesananDestination.routeWithArgs,
+        arguments = listOf(navArgument(DetailsPesananDestination.pesananIdArg) {
+            type = NavType.IntType
+        })
+    ) { backStackEntry ->
+        val pesananId =
+            backStackEntry.arguments?.getInt(DetailsPesananDestination.pesananIdArg)
+        pesananId?.let {
+            PesananDetailsScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToEditItem = { navController.navigate("${PesananEditDestination.route}/$it") }
             )
         }
-        composable(DestinasiEntry.route) {
-            EntryPesananScreen(navigateBack = { navController.popBackStack() })
-        }
-
-        composable(
-            DetailsDestination.routeWithArgs,
-            arguments = listOf(navArgument(DetailsDestination.pesananIdArg) {
-                type = NavType.IntType
-            })
-        ) { backStackEntry ->
-            val itemId = backStackEntry.arguments?.getInt(DetailsDestination.pesananIdArg)
-            itemId?.let {
-                DetailsScreen(
-                    navigateBack = { navController.popBackStack() },
-                    navigateToEditItem = { navController.navigate("${ItemEditDestination.route}/$it") }
-                )
-            }
-        }
-
-        composable(
-            ItemEditDestination.routeWithArgs,
-            arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {
-                type = NavType.IntType
-            })
-        ) {
-            ItemEditScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
-        }
-
-
     }
+    composable(
+        DetailsSepedaDestination.routeWithArgs,
+        arguments = listOf(navArgument(DetailsSepedaDestination.sepedaIdArg) {
+            type = NavType.IntType
+        })
+    ) { backStackEntry ->
+        val sepedaId = backStackEntry.arguments?.getInt(DetailsSepedaDestination.sepedaIdArg)
+        sepedaId?.let {
+            SepedaDetailsScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToEditItem = { navController.navigate("${SepedaEditDestination.route}/$it") }
+            )
+        }
+    }
+    composable(
+        PesananEditDestination.routeWithArgs,
+        arguments = listOf(navArgument(PesananEditDestination.itemIdArg) {
+            type = NavType.IntType
+        })
+    ) {
+        PesananEditScreen(
+            navigateBack = { navController.popBackStack() },
+            onNavigateUp = { navController.navigateUp() })
+    }
+    composable(
+        SepedaEditDestination.routeWithArgs,
+        arguments = listOf(navArgument(SepedaEditDestination.sepedaIdArg) {
+            type = NavType.IntType
+        })
+    ) {
+        SepedaEditScreen(
+            navigateBack = { navController.popBackStack() },
+            onNavigateUp = { navController.navigateUp() })
+    }
+}
 }

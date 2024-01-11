@@ -1,15 +1,21 @@
 <resources>
     <string name="app_name">Sepeda Listrik</string>
     <string name="entry_pesanan">Tambah Pesanan</string>
+    <string name="entry_sepeda">Tambah Sepeda</string>
     <string name="deskripsi_no_item">Tidak ada Pesanan. Tap (+) untuk menambah data.</string>
     <string name="nama">Nama Penyewa</string>
+    <string name="nama_sepeda">Nama Sepeda</string>
+    <string name="merk_sepeda">Merk Sepeda</string>
+    <string name="harga_sepeda">Harga Sepeda</string>
     <string name="alamat">Alamat Penyewa</string>
     <string name="telpon">Telpon Penyewa</string>
     <string name="jaminan">Jaminan</string>
     <string name="required_field"> required field</string>
     <string name="btn_submit">Submit</string>
     <string name="detail_pesanan">Detail Penyewa</string>
+    <string name="detail_sepeda">Detail Sepeda</string>
     <string name="edit_pesanan">Edit Penyewa</string>
+    <string name="edit_sepeda">Edit Sepeda</string>
     <string name="back">Kembali</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
