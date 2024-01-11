@@ -3,12 +3,11 @@ package com.example.finaluas.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tblPesanan")
-data class Pesanan(
+@Entity(tableName = "tblSepeda")
+data class Sepeda(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val nama: String = "",
-    val alamat: String = "",
-    val telpon: String = "",
-    val jaminan: String = "",
+    val merk: String = "",
+    val harga: String = ""
 )

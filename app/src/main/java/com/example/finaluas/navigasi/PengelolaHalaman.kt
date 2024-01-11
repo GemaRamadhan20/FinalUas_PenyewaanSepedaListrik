@@ -26,7 +26,7 @@ import com.example.finaluas.ui.halaman.EntryPesananScreen
 import com.example.finaluas.ui.halaman.HomeScreen
 import com.example.finaluas.ui.halaman.ItemEditDestination
 import com.example.finaluas.ui.halaman.ItemEditScreen
-import com.example.finaluas.R
+import com.example.kontak.R
 
 
 @Composable

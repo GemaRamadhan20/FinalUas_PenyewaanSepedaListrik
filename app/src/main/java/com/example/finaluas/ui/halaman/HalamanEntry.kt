@@ -30,7 +30,7 @@ import com.example.finaluas.model.PenyediaViewModel
 import com.example.finaluas.model.UIStatePesanan
 import com.example.finaluas.navigasi.DestinasiNavigasi
 import com.example.finaluas.navigasi.PesananTopAppBar
-import com.example.finaluas.R
+import com.example.kontak.R
 import kotlinx.coroutines.launch
 
 object DestinasiEntry : DestinasiNavigasi {

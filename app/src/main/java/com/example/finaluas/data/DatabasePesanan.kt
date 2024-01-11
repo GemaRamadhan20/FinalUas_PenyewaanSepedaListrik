@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.InternalCoroutinesApi
 
-@Database(entities = [Pesanan::class], version = 1, exportSchema = false)
+@Database(entities = [Pesanan::class, Sepeda::class], version = 2, exportSchema = false)
 abstract class DatabasePesanan : RoomDatabase() {
     abstract fun pesananDao(): PesananDao
+    abstract fun sepedaDao(): SepedaDao
 
     companion object {
         @Volatile
